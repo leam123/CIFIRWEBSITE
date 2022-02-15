@@ -19,20 +19,20 @@ import MySQLdb
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPOSITORY_ROOT = os.path.dirname(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/dseployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-p^)j2i(6en9)h%r7llse(&m%at_muodv+9m8j8*lxh!y*gxb)g'
+SECRET_KEY = '9$6_t6ivtzex2b#ff3@gvp7w57oi@7n5f13_+fz4a$0w-h8_ff'
 
 # SECRET_KEY = config('SECRET_KEY')
 PORT = os.getenv("PORT", default="5000")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['cifirweb.herokuapp.com']
 
@@ -117,8 +117,7 @@ import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
-
-WHITENOISE_USE_FINDERS = True
+# WHITENOISE_USE_FINDERS = True
 
 # DATABASES = {
 #     'default': {
@@ -166,14 +165,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-IMPORT_EXPORT_USE_TRANSACTIONS = True
+# IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 #STATIC FILES
 # STATIC_URL = 'https://cifirstorage.z13.web.core.windows.net/'
 
-STATIC_URL = '/static/'
+
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 # any static paths you want to publish
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static/')
@@ -183,7 +183,7 @@ STATICFILES_DIRS = (
 )
 
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
 LOGGING = {
     'version': 1,
