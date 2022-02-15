@@ -34,7 +34,7 @@ PORT = os.getenv("PORT", default="5000")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['cifirweb.herokuapp.com']
 
 
 # Application definition
@@ -92,38 +92,6 @@ WSGI_APPLICATION = 'cifirproject.wsgi.application'
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'cifir_database',
-#         'USER': 'CIFIRadmin',
-#         'PASSWORD': 'CIFIRpassw0rd',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cifir_database',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
-    }
-}
-
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
-
-
-WHITENOISE_USE_FINDERS = True
-
-# DATABASES = {
-#     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'cifir_database',
 #         'USER': 'root',
@@ -135,6 +103,22 @@ WHITENOISE_USE_FINDERS = True
 #         },
 #     }
 # }
+
+# keep this
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+# add this
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+
+
+WHITENOISE_USE_FINDERS = True
 
 # DATABASES = {
 #     'default': {
@@ -216,22 +200,6 @@ LOGGING = {
         },
     },
 }
-
-#MEDIA FILES 
-
-# MEDIA_URL = 'https://cifirstorage.z13.web.core.windows.net/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
-# DEFAULT_FILE_STORAGE = 'cifirproject.custom_azure.AzureMediaStorage'
-
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
-
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# STATICFILES_STORAGE = 'cifirproject.custom_azure.AzureStaticStorage'
-
-# MEDIA_URL = 'https://cifirstorage.blob.core.windows.net/media/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
