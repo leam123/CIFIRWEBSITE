@@ -32,7 +32,7 @@ SECRET_KEY = '9$6_t6ivtzex2b#ff3@gvp7w57oi@7n5f13_+fz4a$0w-h8_ff'
 PORT = os.getenv("PORT", default="5000")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['cifirweb.herokuapp.com']
 
