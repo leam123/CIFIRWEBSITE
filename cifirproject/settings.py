@@ -23,13 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 REPOSITORY_ROOT = os.path.dirname(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/3.2/howto/dseployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-p^)j2i(6en9)h%r7llse(&m%at_muodv+9m8j8*lxh!y*gxb)g'
 
 # SECRET_KEY = config('SECRET_KEY')
-# PORT = os.getenv("PORT", default="5000")
+PORT = os.getenv("PORT", default="5000")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
