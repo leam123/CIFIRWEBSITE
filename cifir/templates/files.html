@@ -1,0 +1,186 @@
+{% extends "base.html" %} {% load static %} {% block content %}<br />
+{% if user.is_authenticated %}
+<div class="container-fluid">
+  <div class="card">
+    {% for collection_name in collection_names %}
+    <div class="card-header">
+      <div>
+      <a class="far fa-folder-open icon-link icon-link-icon" href='{% url "cifir:collections_view" %}'> </a>
+        <span>  {{collection_name.name}} </span>
+      </div>
+       
+      <div >
+        <a class="buttons">
+          <i
+            class="far fa-edit icon-link icon-link-icon"
+            data-toggle="modal"
+            data-target="#editCollectionModal-{{collection_name.id}}"
+          ></i>
+        </a>
+        <a class="buttons">
+          <i
+            class="far fa-trash-alt"
+            data-toggle="modal"
+            data-target="#deleteCollectionModal-{{collection_name.id}}"
+          ></i>
+        </a>
+      </div>
+    </div>
+    <div class="card-body collection-folders">
+      {% for cbook in collectionBook %}
+      <form action="/cifir/epub/" method="POST" id="bookform">
+        <!-- NO ACTION AND ID YET -->
+        {% csrf_token %}
+        {% include './components/CollectionBooks.html' %}
+      </form>
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- Modal edit-->
+<div
+  class="modal fade"
+  id="editCollectionModal-{{collection_name.id}}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editCollectionModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editCollectionModal-{{collection_name.id}}">
+          Rename Collection
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="txt_field">
+            <div class="i-folders">
+   
+
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                placeholder="Input new collection name"
+                name="name"
+                maxlength="150"
+                size="50"
+                required=""
+                id="id_collection_name"
+              />
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                placeholder="Rename Collection"
+                name="id"
+                maxlength="150"
+                required=""
+                id="id_collection_id"
+                value="{{collection_name.id}}"
+                hidden
+              />
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-close-all"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn btn-all"
+              name="editCollectionBtn"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal delete-->
+<div
+  class="modal fade"
+  id="deleteCollectionModal-{{collection_name.id}}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="deleteCollectionModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="deleteCollectionModal-{{collection_name.id}}"
+        >
+          Delete Collection
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="txt_field">
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              name="id"
+              maxlength="150"
+              required=""
+              id="id_collection_id"
+              value="{{collection_name.id}}"
+              hidden
+            />
+          </div>
+
+          Are you sure you want to delete this record?
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-close-all"
+              data-dismiss="modal"
+            >
+              No
+            </button>
+            <button
+              type="submit"
+              class="btn btn-all"
+              name="deleteCollectionBtn"
+            >
+              Yes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %} {% endif %} {% endblock content %}

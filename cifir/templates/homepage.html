@@ -1,0 +1,171 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<br />
+ <!--Alert Modal-->
+      <!-- Button trigger modal -->
+        <a data-toggle="modal" data-target="#exampleModal"></a>
+
+        <!-- Modal -->
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            
+              <div class="alert alert-info alert-dismissible d-flex align-items-center fade show modal-content">
+                <div class="modal-header">
+                  <i class="bi-info-circle-fill"></i><strong class="mx-2">Info!</strong>
+                </div>
+                Please reset your password in Account Setting.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+            
+          </div>
+        </div> -->
+    <!--End Alert Modal-->
+{% if user.is_authenticated %}
+{% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+<div class="container-fluid">
+     <div class="card">
+    <div class="card-header">
+      <span>
+        <i class="fas fa-book icon-link"></i>
+        <span class="icon-link icon-link-icon">Books</span>
+      </span>
+    </div>
+    <div class="card-body collection-folders">
+      <!-- {% for book in books %} -->
+      <!-- <form action="/cifir/epub/" method="POST" id="bookform"> -->
+      <!-- NO ACTION AND ID YET -->
+      <!-- <button
+          type="submit"
+          class="btn btn-light"
+          name="book"
+          value="{{book.name}}"
+          form="bookform"
+        >
+          <div class="i-folders">
+            <i class="fas fa-book"></i>
+          </div>
+          <h6>{{ book.title}}</h6>
+          <input type="text" name="book_id" value="{{book.id}}" hidden />
+        </button> -->
+      {% include './components/TheBook.html' %}
+      <!-- </form> -->
+      <!-- {% if book.file %}
+      <a href="{{ book.file.url }}"></a>
+      {% endif %} {% endfor %} -->
+    </div>
+  </div>
+</div>
+<br />
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <span>
+        <i class="fas fa-book-reader icon-link"></i>
+        <a
+          class="icon-link icon-link-icon"
+          href='{% url "cifir:collections_view" %}'
+        >
+          Collections
+        </a>
+      </span>
+    </div>
+    <div class="card-body collection-folders">
+      {% for collection in collections %}
+      <form action="/cifir/books/" method="POST" id="collectionform">
+        {% csrf_token %} {% include './components/TheFolder.html' %}
+      </form>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<br />
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <span>
+        <i class="fas fa-globe icon-link"></i>
+
+        <span class="icon-link icon-link-icon">
+          <a
+        class="icon-link icon-link-icon"
+        href='{% url "cifir:networklibraries_view" %}'
+      >
+        Network Libraries
+      </a>
+        </span>
+
+      </span>
+    </div>
+   <section class="pt-5 pb-5" style="height: 500px;">
+    <div class="container">
+      <ul class="list">
+        <div class="slider">
+        
+          {% include './components/NetworkLibrariesCarousel.html' %}
+
+        </div>
+      </ul>
+    </div>
+  </section>
+  </div>
+</div>
+{% endif %} {% endblock content %}
+
+{% block extrascriptfooter %}
+<script defer>
+
+//Book Slider
+$(document).ready(function() {
+  $('.slider').slick({
+    dots: true,
+    infinite: true,
+    speed: 700,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    nextArrow: '<button type="button" class="btn btn-next"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>',
+    prevArrow: '<button type="button" class="btn btn-prev"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>',
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ],
+  });
+});
+
+$(document).ready(function() {
+    // show the alert
+    setTimeout(function() {
+        $(".alert").alert('close');
+    }, 2000);
+});
+</script>
+{% endblock extrascriptfooter %}
+
