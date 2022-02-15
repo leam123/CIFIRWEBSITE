@@ -17,9 +17,6 @@ import pymysql
 pymysql.install_as_MySQLdb()
 import MySQLdb
 
-import django_heroku
-import dj_database_url
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -29,10 +26,10 @@ REPOSITORY_ROOT = os.path.dirname(BASE_DIR)
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-p^)j2i(6en9)h%r7llse(&m%at_muodv+9m8j8*lxh!y*gxb)g'
+SECRET_KEY = 'django-insecure-p^)j2i(6en9)h%r7llse(&m%at_muodv+9m8j8*lxh!y*gxb)g'
 
-SECRET_KEY = config('SECRET_KEY')
-PORT = os.getenv("PORT", default="5000")
+# SECRET_KEY = config('SECRET_KEY')
+# PORT = os.getenv("PORT", default="5000")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -93,16 +90,35 @@ WSGI_APPLICATION = 'cifirproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'cifir_database',
+#         'USER': 'CIFIRadmin',
+#         'PASSWORD': 'CIFIRpassw0rd',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cifir_database',
-        'USER': 'CIFIRadmin',
-        'PASSWORD': 'CIFIRpassw0rd',
-        'HOST': 'localhost',
-        'PORT': '',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
 
 WHITENOISE_USE_FINDERS = True
 
@@ -184,8 +200,6 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-
-
 #MEDIA FILES 
 
 # MEDIA_URL = 'https://cifirstorage.z13.web.core.windows.net/media/'
@@ -193,10 +207,10 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # DEFAULT_FILE_STORAGE = 'cifirproject.custom_azure.AzureMediaStorage'
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # STATICFILES_STORAGE = 'cifirproject.custom_azure.AzureStaticStorage'
 
@@ -230,4 +244,6 @@ EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_PASSWORD'))
 
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 
+
+import django_heroku
 django_heroku.settings(locals())
