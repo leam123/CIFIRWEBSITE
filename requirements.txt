@@ -18,7 +18,6 @@ lxml==4.6.1
 pdfplumber==0.5.28
 Pillow==7.2.0
 PyMySQL==1.0.2
-selenium
 splinter==0.17.0
 gunicorn==20.1.0
 importlib-metadata==4.10.1

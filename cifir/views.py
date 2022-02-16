@@ -79,6 +79,20 @@ from cifir.serializers import BookSerializer
 
 from .models import *
 
+def setDriverOptions():
+	options = chromedriver.ChromeOptions()
+	options.add_experimental_option("detach", True)
+
+	return options
+
+def automateLogin(username, password, url, loginBtnSelector, indicator):
+	driver = chromedriver.Chrome(options=setDriverOptions())
+	if indicator == 1:
+		driver.get(url)
+		username_field = driver.find_element_by_css_selector("#username")
+		username_field.send_keys(username)
+		driver.execute_script("document.querySelector('#password').setAttribute('value','"+ password +"')")
+		driver.execute_script("document.querySelector('"+ loginBtnSelector +"').click();")
 
 # Create your views here.
 def updateBookStatus(item, book_id):
@@ -225,7 +239,8 @@ class homePageView(View):
 
 			if "Cambridge Core" in request.POST:
 				loginBtnSelector = '#login-form > div:nth-child(5) > button'
-				automateLoginToSite(request, username, password, url, loginBtnSelector, 1)
+				# automateLoginToSite(request, username, password, url, loginBtnSelector, 1)
+				automateLogin(request, username, password, url, loginBtnSelector, 1)
 				return redirect('cifir:home_view')
 
 			elif "ProQuest Elibrary" in request.POST:
