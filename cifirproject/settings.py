@@ -106,9 +106,9 @@ DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
        'NAME': 'cifir_database',
-       'USER': 'cifiruser',
-       'PASSWORD': 'cifirpass',
-       'HOST': '127.0.0.1',
+       'USER': 'Garcia',
+       'PASSWORD': '',
+       'HOST': 'local socket',
        'PORT': '5432',
    }
 }
