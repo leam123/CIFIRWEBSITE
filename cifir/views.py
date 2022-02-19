@@ -814,7 +814,7 @@ class viewBook(View):
 
 Current_Date = datetime.today().strftime ('%d-%b-%Y')
 User = get_user_model()
-loc1 = 'C:/accounts.csv'
+loc1 = 'C:\\accounts.csv'
 # loc2 = 'C:/accounts-saved'+str(Current_Date)+str(random.randint(0,100))+'.csv'
 # os.rename(loc1,loc2)
 file = loc1
