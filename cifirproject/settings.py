@@ -99,16 +99,24 @@ WSGI_APPLICATION = 'cifirproject.wsgi.application'
 #         'OPTIONS': {
 #             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
 #         },
-#     }
+#     },
+#     'postgresql': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'cifir_database',
+#        'USER': 'postgres',
+#        'PASSWORD': 'garcia',
+#        'HOST': '127.0.0.1',
+#        'PORT': '5432',
+#    }
 # }
 
 DATABASES = {
    'default': {
-       'ENGINE': 'django.db.backends.postgresql',
+       'ENGINE': 'django.db.backends.postgresql_psycopg2',
        'NAME': 'cifir_database',
        'USER': 'postgres',
        'PASSWORD': 'garcia',
-       'HOST': 'localhost',
+       'HOST': '127.0.0.1',
        'PORT': '5432',
    }
 }
