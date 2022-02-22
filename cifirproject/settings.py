@@ -110,6 +110,7 @@ WSGI_APPLICATION = 'cifirproject.wsgi.application'
 #    }
 # }
 
+#postgresql
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql_psycopg2',

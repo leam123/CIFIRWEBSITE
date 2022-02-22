@@ -82,6 +82,7 @@ def setDriverOptions():
 
 	return options
 
+#selenium
 def automateLogin(request, username, password, url, loginBtnSelector, indicator):
 	driver = chromedriver.Chrome(options=setDriverOptions())
 	if indicator == 1:
