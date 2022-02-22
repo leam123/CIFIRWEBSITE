@@ -82,7 +82,7 @@ def setDriverOptions():
 
 	return options
 
-def automateLogin(username, password, url, loginBtnSelector, indicator):
+def automateLogin(request, username, password, url, loginBtnSelector, indicator):
 	driver = chromedriver.Chrome(options=setDriverOptions())
 	if indicator == 1:
 		driver.get(url)
