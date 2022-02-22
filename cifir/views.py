@@ -237,8 +237,8 @@ class homePageView(View):
 
 			if "Cambridge Core" in request.POST:
 				loginBtnSelector = '#login-form > div:nth-child(5) > button'
-				# automateLoginToSite(request, username, password, url, loginBtnSelector, 1)
-				automateLogin(request, username, password, url, loginBtnSelector, 1)
+				automateLoginToSite(request, username, password, url, loginBtnSelector, 1)
+				# automateLogin(request, username, password, url, loginBtnSelector, 1)
 				return redirect('cifir:home_view')
 
 			elif "ProQuest Elibrary" in request.POST:
