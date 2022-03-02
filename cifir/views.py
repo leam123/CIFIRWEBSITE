@@ -78,12 +78,16 @@ from selenium.webdriver.support import expected_conditions as EC
 
 def setDriverOptions():
 	# options = chromedriver.ChromeOptions()
-	options = webdriver.ChromeOptions()
+	# options = webdriver.ChromeOptions()
+	options = Options()
 	# options.add_experimental_option("detach", True)
 	options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-	options.set_capability("detach", True)
+	
+	print(os.environ.get("GOOGLE_CHROME_BIN"))
+
 	options.add_argument("--no-sandbox")
 	options.add_argument("--disable-gpu")
+	options.set_capability("detach", True)
 
 	return options
 
