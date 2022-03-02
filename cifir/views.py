@@ -79,13 +79,15 @@ from selenium.webdriver.support import expected_conditions as EC
 def setDriverOptions():
 	options = chromedriver.ChromeOptions()
 	# options.add_experimental_option("detach", True)
+	options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 	options.set_capability("detach", True)
+	options.add_argument("--no-sandbox")
 
 	return options
 
 #selenium
 def automateLogin(request, username, password, url, loginBtnSelector, indicator):
-	driver = chromedriver.Chrome(options=setDriverOptions())
+	driver = chromedriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=setDriverOptions())
 	if indicator == 1:
 		driver.get(url)
 		username_field = driver.find_element_by_css_selector("#username")
