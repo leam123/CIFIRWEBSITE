@@ -78,7 +78,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 def setDriverOptions():
 	options = chromedriver.ChromeOptions()
-	options.add_experimental_option("detach", True)
+	# options.add_experimental_option("detach", True)
+	options.set_capability("detach", True)
 
 	return options
 
