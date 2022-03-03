@@ -86,15 +86,15 @@ def setDriverOptions():
 	print(os.environ.get("GOOGLE_CHROME_BIN"))
 
 	options.add_argument("--no-sandbox")
-	options.add_argument("--disable-gpu")
+	options.add_argument('--disable-dev-shm-usage')
 	options.set_capability("detach", True)
 
 	return options
 
 #selenium
 def automateLogin(request, username, password, url, loginBtnSelector, indicator):
-	# driver = chromedriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=setDriverOptions())
-	driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=setDriverOptions())
+	driver = chromedriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=setDriverOptions())
+	# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=setDriverOptions())
 	if indicator == 1:
 		driver.get(url)
 
